@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Counter from "./components/Counter";
+import { useState } from "react";
+import Paragraph from "./components/Paragraph";
+import ParagraphList from "./components/ParagraphList";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [texts, setTexts] = useState([]);
+
+  function addText(text) {
+    setTexts([...texts, text]);
+  }
+
+  function decrement() {
+    setCount(count - 1);
+  }
+  function increment() {
+    setCount(count + 1);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Counter decrement={decrement} increment={increment} count={count} />
+      <Paragraph addText={addText} texts={texts} />
+      <ParagraphList texts={texts} />
     </div>
   );
 }
